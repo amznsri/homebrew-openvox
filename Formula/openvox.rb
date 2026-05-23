@@ -36,12 +36,12 @@ class Openvox < Formula
   homepage "https://github.com/amznsri/openvox"
 
   # These two lines are rewritten by the release pipeline on every tag.
-  # The 0.1.5 + zero-sha placeholders are intentional — they make a
+  # The 0.1.6 + zero-sha placeholders are intentional — they make a
   # mistakenly-tapped pre-release formula fail at the download step
   # rather than silently install a broken build.
-  url "https://files.pythonhosted.org/packages/source/o/openvox-core/openvox_core-0.1.5.tar.gz"
-  sha256 "7c60f4b3e4e729739f6f165fe3e9392f723f48c44f59dcbcd66d71d475c142ba"
-  version "0.1.5"
+  url "https://files.pythonhosted.org/packages/source/o/openvox-core/openvox_core-0.1.6.tar.gz"
+  sha256 "35cad55b62ac46b4523265d94dc85e4dd088c9f071088dae40e2a4e51e2df85f"
+  version "0.1.6"
 
   license "Apache-2.0"
   head "https://github.com/amznsri/openvox.git", branch: "main"
@@ -56,8 +56,8 @@ class OpenvoxCore < Formula
 
   desc "Shiny new formula"
   homepage "None"
-  url "https://files.pythonhosted.org/packages/ee/d8/16c793315c845e7f7202e653cf0f653d4c4403d58b25a3b92d4cb32795ee/openvox_core-0.1.5.tar.gz"
-  sha256 "7c60f4b3e4e729739f6f165fe3e9392f723f48c44f59dcbcd66d71d475c142ba"
+  url "https://files.pythonhosted.org/packages/ba/70/483baabaf33b2ad08df72b9a611815f9f82ac229a187d76f60a71191003e/openvox_core-0.1.6.tar.gz"
+  sha256 "35cad55b62ac46b4523265d94dc85e4dd088c9f071088dae40e2a4e51e2df85f"
 
   depends_on "python3"
 
