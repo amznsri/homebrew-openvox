@@ -46,21 +46,312 @@ class Openvox < Formula
   homepage "https://github.com/amznsri/openvox"
 
   # These two lines are rewritten by the release pipeline on every tag.
-  # The 0.2.2 + zero-sha placeholders are intentional — they make a
+  # The 0.2.3 + zero-sha placeholders are intentional — they make a
   # mistakenly-tapped pre-release formula fail at the download step
   # rather than silently install a broken build.
-  url "https://files.pythonhosted.org/packages/source/o/openvox-core/openvox_core-0.2.2.tar.gz"
-  sha256 "ba34f21301996c7fbd7eaebfeecfbe66fbe2b3ae2a4a350d89c62a046aa20c6f"
-  version "0.2.2"
+  url "https://files.pythonhosted.org/packages/source/o/openvox-core/openvox_core-0.2.3.tar.gz"
+  version "0.2.3"
+  sha256 "643d6646ac911bf9f89ad1cba160fd40161d2a5c3cfb14f210d5ae18b78d0b9b"
 
   license "Apache-2.0"
   head "https://github.com/amznsri/openvox.git", branch: "main"
 
-  depends_on "ffmpeg"          # used by pydub for audio decoding
-  depends_on "python@3.12"     # ≥ 3.11 per pyproject; tap defaults to .12
-  depends_on "rust" => :build  # needed by some sub-deps (cryptography wheels usually ship pre-built but we cover the source-build path)
+  # Build-time deps come first (brew style enforces alphabetical
+  # ordering, but `build`-tagged deps generally lead). With wheel-first
+  # resources we don't actually compile the heavy stuff
+  # (numpy/cryptography/etc. — those are pre-built per OS). A handful
+  # of sdist-only deps (bcrypt declares pkgconf + rust in its PyPI
+  # metadata) still need a build toolchain.
+  depends_on "pkgconf" => :build
+  depends_on "rust" => :build
+
+  depends_on "ffmpeg"             # used by pydub for audio decoding
+  depends_on "python@3.12"        # ≥ 3.11 per pyproject; tap defaults to .12
 
   # ─── BEGIN GENERATED RESOURCES ───
+  # ── Per-OS wheels (compiled deps; no source build at install time) ──
+  on_macos do
+    on_arm do
+      resource "aiohttp" do
+        url "https://files.pythonhosted.org/packages/29/47/7be41556bfbb6917069d6a6634bb7dd5e163ba445b783a90d40f5ac7e3a7/aiohttp-3.13.5-cp312-cp312-macosx_11_0_arm64.whl"
+        sha256 "ab2899f9fa2f9f741896ebb6fa07c4c883bfa5c7f2ddd8cf2aafa86fa981b2d2"
+      end
+      resource "asyncpg" do
+        url "https://files.pythonhosted.org/packages/36/01/ffaa189dcb63a2471720615e60185c3f6327716fdc0fc04334436fbb7c65/asyncpg-0.31.0-cp312-cp312-macosx_11_0_arm64.whl"
+        sha256 "0c89ccf741c067614c9b5fc7f1fc6f3b61ab05ae4aaa966e6fd6b93097c7d20d"
+      end
+      resource "cffi" do
+        url "https://files.pythonhosted.org/packages/df/a2/781b623f57358e360d62cdd7a8c681f074a71d445418a776eef0aadb4ab4/cffi-2.0.0-cp312-cp312-macosx_11_0_arm64.whl"
+        sha256 "8eca2a813c1cb7ad4fb74d368c2ffbbb4789d377ee5bb8df98373c2cc0dee76c"
+      end
+      resource "google-crc32c" do
+        url "https://files.pythonhosted.org/packages/e9/5f/7307325b1198b59324c0fa9807cafb551afb65e831699f2ce211ad5c8240/google_crc32c-1.8.0-cp312-cp312-macosx_12_0_arm64.whl"
+        sha256 "4b8286b659c1335172e39563ab0a768b8015e88e08329fa5321f774275fc3113"
+      end
+      resource "hiredis" do
+        url "https://files.pythonhosted.org/packages/77/4b/35a71d088c6934e162aa81c7e289fa3110a3aca84ab695d88dbd488c74a2/hiredis-3.3.1-cp312-cp312-macosx_11_0_arm64.whl"
+        sha256 "8e3754ce60e1b11b0afad9a053481ff184d2ee24bea47099107156d1b84a84aa"
+      end
+      resource "httptools" do
+        url "https://files.pythonhosted.org/packages/2a/0d/7f3fd28e2ce311ccc998c388dd1c53b18120fda3b70ebb022b135dc9839b/httptools-0.7.1-cp312-cp312-macosx_11_0_arm64.whl"
+        sha256 "f25bbaf1235e27704f1a7b86cd3304eabc04f569c828101d94a0e605ef7205a5"
+      end
+      resource "MarkupSafe" do
+        url "https://files.pythonhosted.org/packages/9a/81/7e4e08678a1f98521201c3079f77db69fb552acd56067661f8c2f534a718/markupsafe-3.0.3-cp312-cp312-macosx_11_0_arm64.whl"
+        sha256 "1872df69a4de6aead3491198eaf13810b565bdbeec3ae2dc8780f14458ec73ce"
+      end
+      resource "numpy" do
+        url "https://files.pythonhosted.org/packages/ea/12/92c4c131527599e8288d6918e888d88726f84d805d784b771f32408aeaef/numpy-2.4.6-cp312-cp312-macosx_11_0_arm64.whl"
+        sha256 "ebfb099f8dcf083deef3ac1ca4c1503f387cf76296fcb3816b66f5ecb5f54fdb"
+      end
+      resource "orjson" do
+        url "https://files.pythonhosted.org/packages/24/75/05912954c8b288f34fcf5cd4b9b071cb4f6e77b9961e175e56ebb258089f/orjson-3.11.9-cp312-cp312-macosx_15_0_arm64.whl"
+        sha256 "e5c9b8f28e726e97d97696c826bc7bea5d71cecd63576dba92924a32c1961291"
+      end
+      resource "pydantic_core" do
+        url "https://files.pythonhosted.org/packages/19/95/6195171e385007300f0f5574592e467c568becce2d937a0b6804f218bc49/pydantic_core-2.46.4-cp312-cp312-macosx_11_0_arm64.whl"
+        sha256 "962ccbab7b642487b1d8b7df90ef677e03134cf1fd8880bf698649b22a69371f"
+      end
+      resource "PyYAML" do
+        url "https://files.pythonhosted.org/packages/89/a0/6cf41a19a1f2f3feab0e9c0b74134aa2ce6849093d5517a0c550fe37a648/pyyaml-6.0.3-cp312-cp312-macosx_11_0_arm64.whl"
+        sha256 "fc09d0aa354569bc501d4e787133afc08552722d3ab34836a80547331bb5d4a0"
+      end
+      resource "rpds-py" do
+        url "https://files.pythonhosted.org/packages/4d/a1/bca7fd3d452b272e13335db8d6b0b3ecde0f90ad6f16f3328c6fb150c889/rpds_py-0.30.0-cp312-cp312-macosx_11_0_arm64.whl"
+        sha256 "6abc8880d9d036ecaafe709079969f56e876fcf107f7a8e9920ba6d5a3878d05"
+      end
+      resource "watchfiles" do
+        url "https://files.pythonhosted.org/packages/5f/8f/6af2ea19065c91d8b0ea3516fdfc8c0d349f407e8e9fbf4e5a17360de8ad/watchfiles-1.2.0-cp312-cp312-macosx_11_0_arm64.whl"
+        sha256 "2d95ddc1eb6914154253d239089900813f6a767e174b8e6a50e7fdacb7e4236c"
+      end
+    end
+    on_intel do
+      resource "aiohttp" do
+        url "https://files.pythonhosted.org/packages/be/6f/353954c29e7dcce7cf00280a02c75f30e133c00793c7a2ed3776d7b2f426/aiohttp-3.13.5-cp312-cp312-macosx_10_13_universal2.whl"
+        sha256 "023ecba036ddd840b0b19bf195bfae970083fd7024ce1ac22e9bba90464620e9"
+      end
+      resource "asyncpg" do
+        url "https://files.pythonhosted.org/packages/2a/a6/59d0a146e61d20e18db7396583242e32e0f120693b67a8de43f1557033e2/asyncpg-0.31.0-cp312-cp312-macosx_10_13_x86_64.whl"
+        sha256 "b44c31e1efc1c15188ef183f287c728e2046abb1d26af4d20858215d50d91fad"
+      end
+      resource "bcrypt" do
+        url "https://files.pythonhosted.org/packages/84/29/6237f151fbfe295fe3e074ecc6d44228faa1e842a81f6d34a02937ee1736/bcrypt-5.0.0-cp38-abi3-macosx_10_12_universal2.whl"
+        sha256 "fc746432b951e92b58317af8e0ca746efe93e66555f1b40888865ef5bf56446b"
+      end
+      resource "cffi" do
+        url "https://files.pythonhosted.org/packages/ea/47/4f61023ea636104d4f16ab488e268b93008c3d0bb76893b1b31db1f96802/cffi-2.0.0-cp312-cp312-macosx_10_13_x86_64.whl"
+        sha256 "6d02d6655b0e54f54c4ef0b94eb6be0607b70853c45ce98bd278dc7de718be5d"
+      end
+      resource "cryptography" do
+        url "https://files.pythonhosted.org/packages/df/3d/01f6dd9190170a5a241e0e98c2d04be3664a9e6f5b9b872cde63aff1c3dd/cryptography-48.0.0-cp311-abi3-macosx_10_9_universal2.whl"
+        sha256 "0c558d2cdffd8f4bbb30fc7134c74d2ca9a476f830bb053074498fbc86f41ed6"
+      end
+      resource "google-crc32c" do
+        url "https://files.pythonhosted.org/packages/21/8e/58c0d5d86e2220e6a37befe7e6a94dd2f6006044b1a33edf1ff6d9f7e319/google_crc32c-1.8.0-cp312-cp312-macosx_12_0_x86_64.whl"
+        sha256 "2a3dc3318507de089c5384cc74d54318401410f82aa65b2d9cdde9d297aca7cb"
+      end
+      resource "greenlet" do
+        url "https://files.pythonhosted.org/packages/c4/37/4549f149c9797c21b32c2683c33522af22522099de128b2406672526d005/greenlet-3.5.1-cp312-cp312-macosx_11_0_universal2.whl"
+        sha256 "fa4f98af3a528f0c3fd592a26df7f376f93329c8f4d987f6bb979057af8bf5e2"
+      end
+      resource "hiredis" do
+        url "https://files.pythonhosted.org/packages/b3/1d/1a7d925d886211948ab9cca44221b1d9dd4d3481d015511e98794e37d369/hiredis-3.3.1-cp312-cp312-macosx_10_15_universal2.whl"
+        sha256 "60543f3b068b16a86e99ed96b7fdae71cdc1d8abdfe9b3f82032a555e52ece7e"
+      end
+      resource "httptools" do
+        url "https://files.pythonhosted.org/packages/53/7f/403e5d787dc4942316e515e949b0c8a013d84078a915910e9f391ba9b3ed/httptools-0.7.1-cp312-cp312-macosx_10_13_universal2.whl"
+        sha256 "38e0c83a2ea9746ebbd643bdfb521b9aa4a91703e2cd705c20443405d2fd16a5"
+      end
+      resource "MarkupSafe" do
+        url "https://files.pythonhosted.org/packages/5a/72/147da192e38635ada20e0a2e1a51cf8823d2119ce8883f7053879c2199b5/markupsafe-3.0.3-cp312-cp312-macosx_10_13_x86_64.whl"
+        sha256 "d53197da72cc091b024dd97249dfc7794d6a56530370992a5e1a08983ad9230e"
+      end
+      resource "numpy" do
+        url "https://files.pythonhosted.org/packages/95/2a/3d7b5ac8aac24feaf9ad7ed58f45b0bbc06d37e4338ae84c9f2298b570f9/numpy-2.4.6-cp312-cp312-macosx_10_13_x86_64.whl"
+        sha256 "001fbb8e08d942dd57599e781f2472269ee7f2755fae407b4f67b2f0b17da3f1"
+      end
+      resource "orjson" do
+        url "https://files.pythonhosted.org/packages/16/6d/11867a3ffa3a3608d84a4de51ef4dd0896d6b5cc9132fbe1daf593e677bc/orjson-3.11.9-cp312-cp312-macosx_10_15_x86_64.macosx_11_0_arm64.macosx_10_15_universal2.whl"
+        sha256 "9ef6fe90aadef185c7b128859f40beb24720b4ecea95379fc9000931179c3a49"
+      end
+      resource "pycryptodome" do
+        url "https://files.pythonhosted.org/packages/db/6c/a1f71542c969912bb0e106f64f60a56cc1f0fabecf9396f45accbe63fa68/pycryptodome-3.23.0-cp37-abi3-macosx_10_9_universal2.whl"
+        sha256 "187058ab80b3281b1de11c2e6842a357a1f71b42cb1e15bce373f3d238135c27"
+      end
+      resource "pydantic_core" do
+        url "https://files.pythonhosted.org/packages/ce/8c/af022f0af448d7747c5154288d46b5f2bc5f17366eaa0e23e9aa04d59f3b/pydantic_core-2.46.4-cp312-cp312-macosx_10_12_x86_64.whl"
+        sha256 "3245406455a5d98187ec35530fd772b1d799b26667980872c8d4614991e2c4a2"
+      end
+      resource "PyYAML" do
+        url "https://files.pythonhosted.org/packages/d1/33/422b98d2195232ca1826284a76852ad5a86fe23e31b009c9886b2d0fb8b2/pyyaml-6.0.3-cp312-cp312-macosx_10_13_x86_64.whl"
+        sha256 "7f047e29dcae44602496db43be01ad42fc6f1cc0d8cd6c83d342306c32270196"
+      end
+      resource "rpds-py" do
+        url "https://files.pythonhosted.org/packages/03/e7/98a2f4ac921d82f33e03f3835f5bf3a4a40aa1bfdc57975e74a97b2b4bdd/rpds_py-0.30.0-cp312-cp312-macosx_10_12_x86_64.whl"
+        sha256 "a161f20d9a43006833cd7068375a94d035714d73a172b681d8881820600abfad"
+      end
+      resource "uvloop" do
+        url "https://files.pythonhosted.org/packages/3d/ff/7f72e8170be527b4977b033239a83a68d5c881cc4775fca255c677f7ac5d/uvloop-0.22.1-cp312-cp312-macosx_10_13_universal2.whl"
+        sha256 "fe94b4564e865d968414598eea1a6de60adba0c040ba4ed05ac1300de402cd42"
+      end
+      resource "watchfiles" do
+        url "https://files.pythonhosted.org/packages/b8/2f/e42c992d2afda3108ea1c02acecc991b9f31d05c14adc2a7cee9ee211fc4/watchfiles-1.2.0-cp312-cp312-macosx_10_12_x86_64.whl"
+        sha256 "bc13eb17538be00c874699dc0abe4ee2bc8d50bb1166a6b9e175ef3fd7eb8f26"
+      end
+    end
+  end
+  on_linux do
+    on_intel do
+      resource "aiohttp" do
+        url "https://files.pythonhosted.org/packages/57/d8/8d44036d7eb7b6a8ec4c5494ea0c8c8b94fbc0ed3991c1a7adf230df03bf/aiohttp-3.13.5-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl"
+        sha256 "b18f31b80d5a33661e08c89e202edabf1986e9b49c42b4504371daeaa11b47c1"
+      end
+      resource "asyncpg" do
+        url "https://files.pythonhosted.org/packages/8c/d1/a867c2150f9c6e7af6462637f613ba67f78a314b00db220cd26ff559d532/asyncpg-0.31.0-cp312-cp312-manylinux_2_28_x86_64.whl"
+        sha256 "aad7a33913fb8bcb5454313377cc330fbb19a0cd5faa7272407d8a0c4257b671"
+      end
+      resource "bcrypt" do
+        url "https://files.pythonhosted.org/packages/3b/71/427945e6ead72ccffe77894b2655b695ccf14ae1866cd977e185d606dd2f/bcrypt-5.0.0-cp38-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl"
+        sha256 "560ddb6ec730386e7b3b26b8b4c88197aaed924430e7b74666a586ac997249ef"
+      end
+      resource "cffi" do
+        url "https://files.pythonhosted.org/packages/78/2d/7fa73dfa841b5ac06c7b8855cfc18622132e365f5b81d02230333ff26e9e/cffi-2.0.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl"
+        sha256 "3e17ed538242334bf70832644a32a7aae3d83b57567f9fd60a26257e992b79ba"
+      end
+      resource "cryptography" do
+        url "https://files.pythonhosted.org/packages/90/04/673510ed51ddff56575f306cf1617d80411ee76831ccd3097599140efdfe/cryptography-48.0.0-cp311-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl"
+        sha256 "7995ef305d7165c3f11ae07f2517e5a4f1d5c18da1376a0a9ed496336b69e5f3"
+      end
+      resource "google-crc32c" do
+        url "https://files.pythonhosted.org/packages/ce/a9/a780cc66f86335a6019f557a8aaca8fbb970728f0efd2430d15ff1beae0e/google_crc32c-1.8.0-cp312-cp312-manylinux1_x86_64.manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_5_x86_64.whl"
+        sha256 "14f87e04d613dfa218d6135e81b78272c3b904e2a7053b841481b38a7d901411"
+      end
+      resource "greenlet" do
+        url "https://files.pythonhosted.org/packages/40/69/b91cda0647df839483201545913514c2827ebea5e5ccdf931842763bc127/greenlet-3.5.1-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl"
+        sha256 "add5217d68b31130f0beca584d7fef4878327d2e31642b66618a14eef312b63b"
+      end
+      resource "hiredis" do
+        url "https://files.pythonhosted.org/packages/52/3a/859afe2620666bf6d58eb977870c47d98af4999d473b50528b323918f3f7/hiredis-3.3.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl"
+        sha256 "c25132902d3eff38781e0d54f27a0942ec849e3c07dbdce83c4d92b7e43c8dce"
+      end
+      resource "httptools" do
+        url "https://files.pythonhosted.org/packages/84/a6/b3965e1e146ef5762870bbe76117876ceba51a201e18cc31f5703e454596/httptools-0.7.1-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl"
+        sha256 "2c15f37ef679ab9ecc06bfc4e6e8628c32a8e4b305459de7cf6785acd57e4d03"
+      end
+      resource "MarkupSafe" do
+        url "https://files.pythonhosted.org/packages/3c/2e/8d0c2ab90a8c1d9a24f0399058ab8519a3279d1bd4289511d74e909f060e/markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl"
+        sha256 "d6dd0be5b5b189d31db7cda48b91d7e0a9795f31430b7f271219ab30f1d3ac9d"
+      end
+      resource "numpy" do
+        url "https://files.pythonhosted.org/packages/99/60/14115e6364fa676c5397c2ad3004e527e9aa487abf5d0706ec81bbd08529/numpy-2.4.6-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl"
+        sha256 "90f9849678c75fe7afa2d348ac842c168b0a4d3d61919687216dfc547976d853"
+      end
+      resource "orjson" do
+        url "https://files.pythonhosted.org/packages/0e/a4/82b7a2fe5d8a67a59ed831b24d59a3d46ea7d207b66e1602d376541d94a6/orjson-3.11.9-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
+        sha256 "be4fa4f0af7fa18951f7ab3fc2148e223af211bf03f59e1c6034ec3f97f21d61"
+      end
+      resource "pycryptodome" do
+        url "https://files.pythonhosted.org/packages/5f/e9/a09476d436d0ff1402ac3867d933c61805ec2326c6ea557aeeac3825604e/pycryptodome-3.23.0-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
+        sha256 "c8987bd3307a39bc03df5c8e0e3d8be0c4c3518b7f044b0f4c15d1aa78f52575"
+      end
+      resource "pydantic_core" do
+        url "https://files.pythonhosted.org/packages/5f/97/2aab507d3d00ca626e8e57c1eac6a79e4e5fbcc63eb99733ff55d1717f65/pydantic_core-2.46.4-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
+        sha256 "926c9541b14b12b1681dca8a0b75feb510b06c6341b70a8e500c2fdcff837cce"
+      end
+      resource "PyYAML" do
+        url "https://files.pythonhosted.org/packages/8b/9d/b3589d3877982d4f2329302ef98a8026e7f4443c765c46cfecc8858c6b4b/pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl"
+        sha256 "ba1cc08a7ccde2d2ec775841541641e4548226580ab850948cbfda66a1befcdc"
+      end
+      resource "rpds-py" do
+        url "https://files.pythonhosted.org/packages/60/1b/6f8f29f3f995c7ffdde46a626ddccd7c63aefc0efae881dc13b6e5d5bb16/rpds_py-0.30.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
+        sha256 "47f236970bccb2233267d89173d3ad2703cd36a0e2a6e92d0560d333871a3d23"
+      end
+      resource "uvloop" do
+        url "https://files.pythonhosted.org/packages/5f/6f/e62b4dfc7ad6518e7eff2516f680d02a0f6eb62c0c212e152ca708a0085e/uvloop-0.22.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl"
+        sha256 "7b5b1ac819a3f946d3b2ee07f09149578ae76066d70b44df3fa990add49a82e4"
+      end
+      resource "watchfiles" do
+        url "https://files.pythonhosted.org/packages/22/24/ed72f68cbc1333ca9b9f2200aa048bb6658ae41709bc1caad4310f4bdffd/watchfiles-1.2.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
+        sha256 "e53a384f76b631c3ae5334ce6a52f0baa3a911eb94a4eac7f160079868b716d5"
+      end
+    end
+    on_arm do
+      resource "aiohttp" do
+        url "https://files.pythonhosted.org/packages/67/84/c9ecc5828cb0b3695856c07c0a6817a99d51e2473400f705275a2b3d9239/aiohttp-3.13.5-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl"
+        sha256 "a60eaa2d440cd4707696b52e40ed3e2b0f73f65be07fd0ef23b6b539c9c0b0b4"
+      end
+      resource "asyncpg" do
+        url "https://files.pythonhosted.org/packages/9f/62/3f699ba45d8bd24c5d65392190d19656d74ff0185f42e19d0bbd973bb371/asyncpg-0.31.0-cp312-cp312-manylinux_2_28_aarch64.whl"
+        sha256 "12b3b2e39dc5470abd5e98c8d3373e4b1d1234d9fbdedf538798b2c13c64460a"
+      end
+      resource "bcrypt" do
+        url "https://files.pythonhosted.org/packages/45/b6/4c1205dde5e464ea3bd88e8742e19f899c16fa8916fb8510a851fae985b5/bcrypt-5.0.0-cp38-abi3-manylinux2014_aarch64.manylinux_2_17_aarch64.whl"
+        sha256 "c2388ca94ffee269b6038d48747f4ce8df0ffbea43f31abfa18ac72f0218effb"
+      end
+      resource "cffi" do
+        url "https://files.pythonhosted.org/packages/d5/72/12b5f8d3865bf0f87cf1404d8c374e7487dcf097a1c91c436e72e6badd83/cffi-2.0.0-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl"
+        sha256 "b21e08af67b8a103c71a250401c78d5e0893beff75e28c53c98f4de42f774062"
+      end
+      resource "cryptography" do
+        url "https://files.pythonhosted.org/packages/b2/6e/e90527eef33f309beb811cf7c982c3aeffcce8e3edb178baa4ca3ae4a6fa/cryptography-48.0.0-cp311-abi3-manylinux2014_aarch64.manylinux_2_17_aarch64.whl"
+        sha256 "f5333311663ea94f75dd408665686aaf426563556bb5283554a3539177e03b8c"
+      end
+      resource "google-crc32c" do
+        url "https://files.pythonhosted.org/packages/21/3f/3457ea803db0198c9aaca2dd373750972ce28a26f00544b6b85088811939/google_crc32c-1.8.0-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl"
+        sha256 "cb5c869c2923d56cb0c8e6bcdd73c009c36ae39b652dbe46a05eb4ef0ad01454"
+      end
+      resource "greenlet" do
+        url "https://files.pythonhosted.org/packages/38/ff/a4f436709716965eaab9f36ea7b906c8a927fbe32fb1372a2071d964f6b1/greenlet-3.5.1-cp312-cp312-manylinux_2_24_aarch64.manylinux_2_28_aarch64.whl"
+        sha256 "ffea73584b216150eab159b6d12348fb253e68757974de1e2c40d8a318ac89ed"
+      end
+      resource "hiredis" do
+        url "https://files.pythonhosted.org/packages/1f/54/904bc723a95926977764fefd6f0d46067579bac38fffc32b806f3f2c05c0/hiredis-3.3.1-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl"
+        sha256 "e89dabf436ee79b358fd970dcbed6333a36d91db73f27069ca24a02fb138a404"
+      end
+      resource "httptools" do
+        url "https://files.pythonhosted.org/packages/11/7d/71fee6f1844e6fa378f2eddde6c3e41ce3a1fb4b2d81118dd544e3441ec0/httptools-0.7.1-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl"
+        sha256 "7fe6e96090df46b36ccfaf746f03034e5ab723162bc51b0a4cf58305324036f2"
+      end
+      resource "MarkupSafe" do
+        url "https://files.pythonhosted.org/packages/1e/2c/799f4742efc39633a1b54a92eec4082e4f815314869865d876824c257c1e/markupsafe-3.0.3-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl"
+        sha256 "3a7e8ae81ae39e62a41ec302f972ba6ae23a5c5396c8e60113e9066ef893da0d"
+      end
+      resource "numpy" do
+        url "https://files.pythonhosted.org/packages/c9/c6/50a46a6205feba2343f1d6d17438107c5dc491ed1c736e6ea68689fd906b/numpy-2.4.6-cp312-cp312-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl"
+        sha256 "5f9fb9157b4ce2971008323afe46053787b526ef624fea915b261468a8421a0f"
+      end
+      resource "orjson" do
+        url "https://files.pythonhosted.org/packages/ab/86/1c3a47df3bc8191ea9ac51603bbb872a95167a364320c269f2557911f406/orjson-3.11.9-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl"
+        sha256 "26a473dbb4162108b27901492546f83c76fdcea3d0eadff00ae7a07e18dcce09"
+      end
+      resource "pycryptodome" do
+        url "https://files.pythonhosted.org/packages/50/52/adaf4c8c100a8c49d2bd058e5b551f73dfd8cb89eb4911e25a0c469b6b4e/pycryptodome-3.23.0-cp37-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl"
+        sha256 "67bd81fcbe34f43ad9422ee8fd4843c8e7198dd88dd3d40e6de42ee65fbe1490"
+      end
+      resource "pydantic_core" do
+        url "https://files.pythonhosted.org/packages/8e/bc/f47d1ff9cbb1620e1b5b697eef06010035735f07820180e74178226b27b3/pydantic_core-2.46.4-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl"
+        sha256 "8233f2947cf85404441fd7e0085f53b10c93e0ee78611099b5c7237e36aacbf7"
+      end
+      resource "PyYAML" do
+        url "https://files.pythonhosted.org/packages/ed/23/7a778b6bd0b9a8039df8b1b1d80e2e2ad78aa04171592c8a5c43a56a6af4/pyyaml-6.0.3-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl"
+        sha256 "9149cad251584d5fb4981be1ecde53a1ca46c891a79788c0df828d2f166bda28"
+      end
+      resource "rpds-py" do
+        url "https://files.pythonhosted.org/packages/65/1c/ae157e83a6357eceff62ba7e52113e3ec4834a84cfe07fa4b0757a7d105f/rpds_py-0.30.0-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl"
+        sha256 "ca28829ae5f5d569bb62a79512c842a03a12576375d5ece7d2cadf8abe96ec28"
+      end
+      resource "uvloop" do
+        url "https://files.pythonhosted.org/packages/24/68/a6ac446820273e71aa762fa21cdcc09861edd3536ff47c5cd3b7afb10eeb/uvloop-0.22.1-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl"
+        sha256 "700e674a166ca5778255e0e1dc4e9d79ab2acc57b9171b79e65feba7184b3370"
+      end
+      resource "watchfiles" do
+        url "https://files.pythonhosted.org/packages/13/01/b32a967c56fb3e3e5be3db52c3d3b87fa4513aa367d8ed1ad96d42952e5f/watchfiles-1.2.0-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl"
+        sha256 "8f70d8b291ef6e88d19b1f297a6905ddb978888d9272b0d05e6f53309856bcfc"
+      end
+    end
+  end
+
+  # ── Universal wheels (pure-Python, one URL for every OS) ───────────
   resource "aiofiles" do
     url "https://files.pythonhosted.org/packages/bc/8a/340a1555ae33d7354dbca4faa54948d76d89a27ceef032c8c3bc661d003e/aiofiles-25.1.0-py3-none-any.whl"
     sha256 "abe311e527c862958650f9438e859c1fa7568a141b22abcd015e120e86a85695"
@@ -430,482 +721,6 @@ class Openvox < Formula
     sha256 "2783d9226db8797636cd6896e4de81feed252d1db72265686c9558d97a4d94b9"
   end
 
-  # ── Per-OS wheels (compiled deps; no source build at install time) ──
-  on_macos do
-    on_arm do
-      resource "aiohttp" do
-        url "https://files.pythonhosted.org/packages/29/47/7be41556bfbb6917069d6a6634bb7dd5e163ba445b783a90d40f5ac7e3a7/aiohttp-3.13.5-cp312-cp312-macosx_11_0_arm64.whl"
-        sha256 "ab2899f9fa2f9f741896ebb6fa07c4c883bfa5c7f2ddd8cf2aafa86fa981b2d2"
-      end
-    end
-    on_intel do
-      resource "aiohttp" do
-        url "https://files.pythonhosted.org/packages/be/6f/353954c29e7dcce7cf00280a02c75f30e133c00793c7a2ed3776d7b2f426/aiohttp-3.13.5-cp312-cp312-macosx_10_13_universal2.whl"
-        sha256 "023ecba036ddd840b0b19bf195bfae970083fd7024ce1ac22e9bba90464620e9"
-      end
-    end
-  end
-  on_linux do
-    on_intel do
-      resource "aiohttp" do
-        url "https://files.pythonhosted.org/packages/57/d8/8d44036d7eb7b6a8ec4c5494ea0c8c8b94fbc0ed3991c1a7adf230df03bf/aiohttp-3.13.5-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl"
-        sha256 "b18f31b80d5a33661e08c89e202edabf1986e9b49c42b4504371daeaa11b47c1"
-      end
-    end
-    on_arm do
-      resource "aiohttp" do
-        url "https://files.pythonhosted.org/packages/67/84/c9ecc5828cb0b3695856c07c0a6817a99d51e2473400f705275a2b3d9239/aiohttp-3.13.5-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl"
-        sha256 "a60eaa2d440cd4707696b52e40ed3e2b0f73f65be07fd0ef23b6b539c9c0b0b4"
-      end
-    end
-  end
-  on_macos do
-    on_arm do
-      resource "asyncpg" do
-        url "https://files.pythonhosted.org/packages/36/01/ffaa189dcb63a2471720615e60185c3f6327716fdc0fc04334436fbb7c65/asyncpg-0.31.0-cp312-cp312-macosx_11_0_arm64.whl"
-        sha256 "0c89ccf741c067614c9b5fc7f1fc6f3b61ab05ae4aaa966e6fd6b93097c7d20d"
-      end
-    end
-    on_intel do
-      resource "asyncpg" do
-        url "https://files.pythonhosted.org/packages/2a/a6/59d0a146e61d20e18db7396583242e32e0f120693b67a8de43f1557033e2/asyncpg-0.31.0-cp312-cp312-macosx_10_13_x86_64.whl"
-        sha256 "b44c31e1efc1c15188ef183f287c728e2046abb1d26af4d20858215d50d91fad"
-      end
-    end
-  end
-  on_linux do
-    on_intel do
-      resource "asyncpg" do
-        url "https://files.pythonhosted.org/packages/8c/d1/a867c2150f9c6e7af6462637f613ba67f78a314b00db220cd26ff559d532/asyncpg-0.31.0-cp312-cp312-manylinux_2_28_x86_64.whl"
-        sha256 "aad7a33913fb8bcb5454313377cc330fbb19a0cd5faa7272407d8a0c4257b671"
-      end
-    end
-    on_arm do
-      resource "asyncpg" do
-        url "https://files.pythonhosted.org/packages/9f/62/3f699ba45d8bd24c5d65392190d19656d74ff0185f42e19d0bbd973bb371/asyncpg-0.31.0-cp312-cp312-manylinux_2_28_aarch64.whl"
-        sha256 "12b3b2e39dc5470abd5e98c8d3373e4b1d1234d9fbdedf538798b2c13c64460a"
-      end
-    end
-  end
-  on_macos do
-    on_intel do
-      resource "bcrypt" do
-        url "https://files.pythonhosted.org/packages/84/29/6237f151fbfe295fe3e074ecc6d44228faa1e842a81f6d34a02937ee1736/bcrypt-5.0.0-cp38-abi3-macosx_10_12_universal2.whl"
-        sha256 "fc746432b951e92b58317af8e0ca746efe93e66555f1b40888865ef5bf56446b"
-      end
-    end
-  end
-  on_linux do
-    on_intel do
-      resource "bcrypt" do
-        url "https://files.pythonhosted.org/packages/3b/71/427945e6ead72ccffe77894b2655b695ccf14ae1866cd977e185d606dd2f/bcrypt-5.0.0-cp38-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl"
-        sha256 "560ddb6ec730386e7b3b26b8b4c88197aaed924430e7b74666a586ac997249ef"
-      end
-    end
-    on_arm do
-      resource "bcrypt" do
-        url "https://files.pythonhosted.org/packages/45/b6/4c1205dde5e464ea3bd88e8742e19f899c16fa8916fb8510a851fae985b5/bcrypt-5.0.0-cp38-abi3-manylinux2014_aarch64.manylinux_2_17_aarch64.whl"
-        sha256 "c2388ca94ffee269b6038d48747f4ce8df0ffbea43f31abfa18ac72f0218effb"
-      end
-    end
-  end
-  on_macos do
-    on_arm do
-      resource "cffi" do
-        url "https://files.pythonhosted.org/packages/df/a2/781b623f57358e360d62cdd7a8c681f074a71d445418a776eef0aadb4ab4/cffi-2.0.0-cp312-cp312-macosx_11_0_arm64.whl"
-        sha256 "8eca2a813c1cb7ad4fb74d368c2ffbbb4789d377ee5bb8df98373c2cc0dee76c"
-      end
-    end
-    on_intel do
-      resource "cffi" do
-        url "https://files.pythonhosted.org/packages/ea/47/4f61023ea636104d4f16ab488e268b93008c3d0bb76893b1b31db1f96802/cffi-2.0.0-cp312-cp312-macosx_10_13_x86_64.whl"
-        sha256 "6d02d6655b0e54f54c4ef0b94eb6be0607b70853c45ce98bd278dc7de718be5d"
-      end
-    end
-  end
-  on_linux do
-    on_intel do
-      resource "cffi" do
-        url "https://files.pythonhosted.org/packages/78/2d/7fa73dfa841b5ac06c7b8855cfc18622132e365f5b81d02230333ff26e9e/cffi-2.0.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl"
-        sha256 "3e17ed538242334bf70832644a32a7aae3d83b57567f9fd60a26257e992b79ba"
-      end
-    end
-    on_arm do
-      resource "cffi" do
-        url "https://files.pythonhosted.org/packages/d5/72/12b5f8d3865bf0f87cf1404d8c374e7487dcf097a1c91c436e72e6badd83/cffi-2.0.0-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl"
-        sha256 "b21e08af67b8a103c71a250401c78d5e0893beff75e28c53c98f4de42f774062"
-      end
-    end
-  end
-  on_macos do
-    on_intel do
-      resource "cryptography" do
-        url "https://files.pythonhosted.org/packages/df/3d/01f6dd9190170a5a241e0e98c2d04be3664a9e6f5b9b872cde63aff1c3dd/cryptography-48.0.0-cp311-abi3-macosx_10_9_universal2.whl"
-        sha256 "0c558d2cdffd8f4bbb30fc7134c74d2ca9a476f830bb053074498fbc86f41ed6"
-      end
-    end
-  end
-  on_linux do
-    on_intel do
-      resource "cryptography" do
-        url "https://files.pythonhosted.org/packages/90/04/673510ed51ddff56575f306cf1617d80411ee76831ccd3097599140efdfe/cryptography-48.0.0-cp311-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl"
-        sha256 "7995ef305d7165c3f11ae07f2517e5a4f1d5c18da1376a0a9ed496336b69e5f3"
-      end
-    end
-    on_arm do
-      resource "cryptography" do
-        url "https://files.pythonhosted.org/packages/b2/6e/e90527eef33f309beb811cf7c982c3aeffcce8e3edb178baa4ca3ae4a6fa/cryptography-48.0.0-cp311-abi3-manylinux2014_aarch64.manylinux_2_17_aarch64.whl"
-        sha256 "f5333311663ea94f75dd408665686aaf426563556bb5283554a3539177e03b8c"
-      end
-    end
-  end
-  on_macos do
-    on_arm do
-      resource "google-crc32c" do
-        url "https://files.pythonhosted.org/packages/e9/5f/7307325b1198b59324c0fa9807cafb551afb65e831699f2ce211ad5c8240/google_crc32c-1.8.0-cp312-cp312-macosx_12_0_arm64.whl"
-        sha256 "4b8286b659c1335172e39563ab0a768b8015e88e08329fa5321f774275fc3113"
-      end
-    end
-    on_intel do
-      resource "google-crc32c" do
-        url "https://files.pythonhosted.org/packages/21/8e/58c0d5d86e2220e6a37befe7e6a94dd2f6006044b1a33edf1ff6d9f7e319/google_crc32c-1.8.0-cp312-cp312-macosx_12_0_x86_64.whl"
-        sha256 "2a3dc3318507de089c5384cc74d54318401410f82aa65b2d9cdde9d297aca7cb"
-      end
-    end
-  end
-  on_linux do
-    on_intel do
-      resource "google-crc32c" do
-        url "https://files.pythonhosted.org/packages/ce/a9/a780cc66f86335a6019f557a8aaca8fbb970728f0efd2430d15ff1beae0e/google_crc32c-1.8.0-cp312-cp312-manylinux1_x86_64.manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_5_x86_64.whl"
-        sha256 "14f87e04d613dfa218d6135e81b78272c3b904e2a7053b841481b38a7d901411"
-      end
-    end
-    on_arm do
-      resource "google-crc32c" do
-        url "https://files.pythonhosted.org/packages/21/3f/3457ea803db0198c9aaca2dd373750972ce28a26f00544b6b85088811939/google_crc32c-1.8.0-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl"
-        sha256 "cb5c869c2923d56cb0c8e6bcdd73c009c36ae39b652dbe46a05eb4ef0ad01454"
-      end
-    end
-  end
-  on_macos do
-    on_intel do
-      resource "greenlet" do
-        url "https://files.pythonhosted.org/packages/c4/37/4549f149c9797c21b32c2683c33522af22522099de128b2406672526d005/greenlet-3.5.1-cp312-cp312-macosx_11_0_universal2.whl"
-        sha256 "fa4f98af3a528f0c3fd592a26df7f376f93329c8f4d987f6bb979057af8bf5e2"
-      end
-    end
-  end
-  on_linux do
-    on_intel do
-      resource "greenlet" do
-        url "https://files.pythonhosted.org/packages/40/69/b91cda0647df839483201545913514c2827ebea5e5ccdf931842763bc127/greenlet-3.5.1-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl"
-        sha256 "add5217d68b31130f0beca584d7fef4878327d2e31642b66618a14eef312b63b"
-      end
-    end
-    on_arm do
-      resource "greenlet" do
-        url "https://files.pythonhosted.org/packages/38/ff/a4f436709716965eaab9f36ea7b906c8a927fbe32fb1372a2071d964f6b1/greenlet-3.5.1-cp312-cp312-manylinux_2_24_aarch64.manylinux_2_28_aarch64.whl"
-        sha256 "ffea73584b216150eab159b6d12348fb253e68757974de1e2c40d8a318ac89ed"
-      end
-    end
-  end
-  on_macos do
-    on_arm do
-      resource "hiredis" do
-        url "https://files.pythonhosted.org/packages/77/4b/35a71d088c6934e162aa81c7e289fa3110a3aca84ab695d88dbd488c74a2/hiredis-3.3.1-cp312-cp312-macosx_11_0_arm64.whl"
-        sha256 "8e3754ce60e1b11b0afad9a053481ff184d2ee24bea47099107156d1b84a84aa"
-      end
-    end
-    on_intel do
-      resource "hiredis" do
-        url "https://files.pythonhosted.org/packages/b3/1d/1a7d925d886211948ab9cca44221b1d9dd4d3481d015511e98794e37d369/hiredis-3.3.1-cp312-cp312-macosx_10_15_universal2.whl"
-        sha256 "60543f3b068b16a86e99ed96b7fdae71cdc1d8abdfe9b3f82032a555e52ece7e"
-      end
-    end
-  end
-  on_linux do
-    on_intel do
-      resource "hiredis" do
-        url "https://files.pythonhosted.org/packages/52/3a/859afe2620666bf6d58eb977870c47d98af4999d473b50528b323918f3f7/hiredis-3.3.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl"
-        sha256 "c25132902d3eff38781e0d54f27a0942ec849e3c07dbdce83c4d92b7e43c8dce"
-      end
-    end
-    on_arm do
-      resource "hiredis" do
-        url "https://files.pythonhosted.org/packages/1f/54/904bc723a95926977764fefd6f0d46067579bac38fffc32b806f3f2c05c0/hiredis-3.3.1-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl"
-        sha256 "e89dabf436ee79b358fd970dcbed6333a36d91db73f27069ca24a02fb138a404"
-      end
-    end
-  end
-  on_macos do
-    on_arm do
-      resource "httptools" do
-        url "https://files.pythonhosted.org/packages/2a/0d/7f3fd28e2ce311ccc998c388dd1c53b18120fda3b70ebb022b135dc9839b/httptools-0.7.1-cp312-cp312-macosx_11_0_arm64.whl"
-        sha256 "f25bbaf1235e27704f1a7b86cd3304eabc04f569c828101d94a0e605ef7205a5"
-      end
-    end
-    on_intel do
-      resource "httptools" do
-        url "https://files.pythonhosted.org/packages/53/7f/403e5d787dc4942316e515e949b0c8a013d84078a915910e9f391ba9b3ed/httptools-0.7.1-cp312-cp312-macosx_10_13_universal2.whl"
-        sha256 "38e0c83a2ea9746ebbd643bdfb521b9aa4a91703e2cd705c20443405d2fd16a5"
-      end
-    end
-  end
-  on_linux do
-    on_intel do
-      resource "httptools" do
-        url "https://files.pythonhosted.org/packages/84/a6/b3965e1e146ef5762870bbe76117876ceba51a201e18cc31f5703e454596/httptools-0.7.1-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl"
-        sha256 "2c15f37ef679ab9ecc06bfc4e6e8628c32a8e4b305459de7cf6785acd57e4d03"
-      end
-    end
-    on_arm do
-      resource "httptools" do
-        url "https://files.pythonhosted.org/packages/11/7d/71fee6f1844e6fa378f2eddde6c3e41ce3a1fb4b2d81118dd544e3441ec0/httptools-0.7.1-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl"
-        sha256 "7fe6e96090df46b36ccfaf746f03034e5ab723162bc51b0a4cf58305324036f2"
-      end
-    end
-  end
-  on_macos do
-    on_arm do
-      resource "MarkupSafe" do
-        url "https://files.pythonhosted.org/packages/9a/81/7e4e08678a1f98521201c3079f77db69fb552acd56067661f8c2f534a718/markupsafe-3.0.3-cp312-cp312-macosx_11_0_arm64.whl"
-        sha256 "1872df69a4de6aead3491198eaf13810b565bdbeec3ae2dc8780f14458ec73ce"
-      end
-    end
-    on_intel do
-      resource "MarkupSafe" do
-        url "https://files.pythonhosted.org/packages/5a/72/147da192e38635ada20e0a2e1a51cf8823d2119ce8883f7053879c2199b5/markupsafe-3.0.3-cp312-cp312-macosx_10_13_x86_64.whl"
-        sha256 "d53197da72cc091b024dd97249dfc7794d6a56530370992a5e1a08983ad9230e"
-      end
-    end
-  end
-  on_linux do
-    on_intel do
-      resource "MarkupSafe" do
-        url "https://files.pythonhosted.org/packages/3c/2e/8d0c2ab90a8c1d9a24f0399058ab8519a3279d1bd4289511d74e909f060e/markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl"
-        sha256 "d6dd0be5b5b189d31db7cda48b91d7e0a9795f31430b7f271219ab30f1d3ac9d"
-      end
-    end
-    on_arm do
-      resource "MarkupSafe" do
-        url "https://files.pythonhosted.org/packages/1e/2c/799f4742efc39633a1b54a92eec4082e4f815314869865d876824c257c1e/markupsafe-3.0.3-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl"
-        sha256 "3a7e8ae81ae39e62a41ec302f972ba6ae23a5c5396c8e60113e9066ef893da0d"
-      end
-    end
-  end
-  on_macos do
-    on_arm do
-      resource "numpy" do
-        url "https://files.pythonhosted.org/packages/ea/12/92c4c131527599e8288d6918e888d88726f84d805d784b771f32408aeaef/numpy-2.4.6-cp312-cp312-macosx_11_0_arm64.whl"
-        sha256 "ebfb099f8dcf083deef3ac1ca4c1503f387cf76296fcb3816b66f5ecb5f54fdb"
-      end
-    end
-    on_intel do
-      resource "numpy" do
-        url "https://files.pythonhosted.org/packages/95/2a/3d7b5ac8aac24feaf9ad7ed58f45b0bbc06d37e4338ae84c9f2298b570f9/numpy-2.4.6-cp312-cp312-macosx_10_13_x86_64.whl"
-        sha256 "001fbb8e08d942dd57599e781f2472269ee7f2755fae407b4f67b2f0b17da3f1"
-      end
-    end
-  end
-  on_linux do
-    on_intel do
-      resource "numpy" do
-        url "https://files.pythonhosted.org/packages/99/60/14115e6364fa676c5397c2ad3004e527e9aa487abf5d0706ec81bbd08529/numpy-2.4.6-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl"
-        sha256 "90f9849678c75fe7afa2d348ac842c168b0a4d3d61919687216dfc547976d853"
-      end
-    end
-    on_arm do
-      resource "numpy" do
-        url "https://files.pythonhosted.org/packages/c9/c6/50a46a6205feba2343f1d6d17438107c5dc491ed1c736e6ea68689fd906b/numpy-2.4.6-cp312-cp312-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl"
-        sha256 "5f9fb9157b4ce2971008323afe46053787b526ef624fea915b261468a8421a0f"
-      end
-    end
-  end
-  on_macos do
-    on_arm do
-      resource "orjson" do
-        url "https://files.pythonhosted.org/packages/24/75/05912954c8b288f34fcf5cd4b9b071cb4f6e77b9961e175e56ebb258089f/orjson-3.11.9-cp312-cp312-macosx_15_0_arm64.whl"
-        sha256 "e5c9b8f28e726e97d97696c826bc7bea5d71cecd63576dba92924a32c1961291"
-      end
-    end
-    on_intel do
-      resource "orjson" do
-        url "https://files.pythonhosted.org/packages/16/6d/11867a3ffa3a3608d84a4de51ef4dd0896d6b5cc9132fbe1daf593e677bc/orjson-3.11.9-cp312-cp312-macosx_10_15_x86_64.macosx_11_0_arm64.macosx_10_15_universal2.whl"
-        sha256 "9ef6fe90aadef185c7b128859f40beb24720b4ecea95379fc9000931179c3a49"
-      end
-    end
-  end
-  on_linux do
-    on_intel do
-      resource "orjson" do
-        url "https://files.pythonhosted.org/packages/0e/a4/82b7a2fe5d8a67a59ed831b24d59a3d46ea7d207b66e1602d376541d94a6/orjson-3.11.9-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
-        sha256 "be4fa4f0af7fa18951f7ab3fc2148e223af211bf03f59e1c6034ec3f97f21d61"
-      end
-    end
-    on_arm do
-      resource "orjson" do
-        url "https://files.pythonhosted.org/packages/ab/86/1c3a47df3bc8191ea9ac51603bbb872a95167a364320c269f2557911f406/orjson-3.11.9-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl"
-        sha256 "26a473dbb4162108b27901492546f83c76fdcea3d0eadff00ae7a07e18dcce09"
-      end
-    end
-  end
-  on_macos do
-    on_intel do
-      resource "pycryptodome" do
-        url "https://files.pythonhosted.org/packages/db/6c/a1f71542c969912bb0e106f64f60a56cc1f0fabecf9396f45accbe63fa68/pycryptodome-3.23.0-cp37-abi3-macosx_10_9_universal2.whl"
-        sha256 "187058ab80b3281b1de11c2e6842a357a1f71b42cb1e15bce373f3d238135c27"
-      end
-    end
-  end
-  on_linux do
-    on_intel do
-      resource "pycryptodome" do
-        url "https://files.pythonhosted.org/packages/5f/e9/a09476d436d0ff1402ac3867d933c61805ec2326c6ea557aeeac3825604e/pycryptodome-3.23.0-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
-        sha256 "c8987bd3307a39bc03df5c8e0e3d8be0c4c3518b7f044b0f4c15d1aa78f52575"
-      end
-    end
-    on_arm do
-      resource "pycryptodome" do
-        url "https://files.pythonhosted.org/packages/50/52/adaf4c8c100a8c49d2bd058e5b551f73dfd8cb89eb4911e25a0c469b6b4e/pycryptodome-3.23.0-cp37-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl"
-        sha256 "67bd81fcbe34f43ad9422ee8fd4843c8e7198dd88dd3d40e6de42ee65fbe1490"
-      end
-    end
-  end
-  on_macos do
-    on_arm do
-      resource "pydantic_core" do
-        url "https://files.pythonhosted.org/packages/19/95/6195171e385007300f0f5574592e467c568becce2d937a0b6804f218bc49/pydantic_core-2.46.4-cp312-cp312-macosx_11_0_arm64.whl"
-        sha256 "962ccbab7b642487b1d8b7df90ef677e03134cf1fd8880bf698649b22a69371f"
-      end
-    end
-    on_intel do
-      resource "pydantic_core" do
-        url "https://files.pythonhosted.org/packages/ce/8c/af022f0af448d7747c5154288d46b5f2bc5f17366eaa0e23e9aa04d59f3b/pydantic_core-2.46.4-cp312-cp312-macosx_10_12_x86_64.whl"
-        sha256 "3245406455a5d98187ec35530fd772b1d799b26667980872c8d4614991e2c4a2"
-      end
-    end
-  end
-  on_linux do
-    on_intel do
-      resource "pydantic_core" do
-        url "https://files.pythonhosted.org/packages/5f/97/2aab507d3d00ca626e8e57c1eac6a79e4e5fbcc63eb99733ff55d1717f65/pydantic_core-2.46.4-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
-        sha256 "926c9541b14b12b1681dca8a0b75feb510b06c6341b70a8e500c2fdcff837cce"
-      end
-    end
-    on_arm do
-      resource "pydantic_core" do
-        url "https://files.pythonhosted.org/packages/8e/bc/f47d1ff9cbb1620e1b5b697eef06010035735f07820180e74178226b27b3/pydantic_core-2.46.4-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl"
-        sha256 "8233f2947cf85404441fd7e0085f53b10c93e0ee78611099b5c7237e36aacbf7"
-      end
-    end
-  end
-  on_macos do
-    on_arm do
-      resource "PyYAML" do
-        url "https://files.pythonhosted.org/packages/89/a0/6cf41a19a1f2f3feab0e9c0b74134aa2ce6849093d5517a0c550fe37a648/pyyaml-6.0.3-cp312-cp312-macosx_11_0_arm64.whl"
-        sha256 "fc09d0aa354569bc501d4e787133afc08552722d3ab34836a80547331bb5d4a0"
-      end
-    end
-    on_intel do
-      resource "PyYAML" do
-        url "https://files.pythonhosted.org/packages/d1/33/422b98d2195232ca1826284a76852ad5a86fe23e31b009c9886b2d0fb8b2/pyyaml-6.0.3-cp312-cp312-macosx_10_13_x86_64.whl"
-        sha256 "7f047e29dcae44602496db43be01ad42fc6f1cc0d8cd6c83d342306c32270196"
-      end
-    end
-  end
-  on_linux do
-    on_intel do
-      resource "PyYAML" do
-        url "https://files.pythonhosted.org/packages/8b/9d/b3589d3877982d4f2329302ef98a8026e7f4443c765c46cfecc8858c6b4b/pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl"
-        sha256 "ba1cc08a7ccde2d2ec775841541641e4548226580ab850948cbfda66a1befcdc"
-      end
-    end
-    on_arm do
-      resource "PyYAML" do
-        url "https://files.pythonhosted.org/packages/ed/23/7a778b6bd0b9a8039df8b1b1d80e2e2ad78aa04171592c8a5c43a56a6af4/pyyaml-6.0.3-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl"
-        sha256 "9149cad251584d5fb4981be1ecde53a1ca46c891a79788c0df828d2f166bda28"
-      end
-    end
-  end
-  on_macos do
-    on_arm do
-      resource "rpds-py" do
-        url "https://files.pythonhosted.org/packages/4d/a1/bca7fd3d452b272e13335db8d6b0b3ecde0f90ad6f16f3328c6fb150c889/rpds_py-0.30.0-cp312-cp312-macosx_11_0_arm64.whl"
-        sha256 "6abc8880d9d036ecaafe709079969f56e876fcf107f7a8e9920ba6d5a3878d05"
-      end
-    end
-    on_intel do
-      resource "rpds-py" do
-        url "https://files.pythonhosted.org/packages/03/e7/98a2f4ac921d82f33e03f3835f5bf3a4a40aa1bfdc57975e74a97b2b4bdd/rpds_py-0.30.0-cp312-cp312-macosx_10_12_x86_64.whl"
-        sha256 "a161f20d9a43006833cd7068375a94d035714d73a172b681d8881820600abfad"
-      end
-    end
-  end
-  on_linux do
-    on_intel do
-      resource "rpds-py" do
-        url "https://files.pythonhosted.org/packages/60/1b/6f8f29f3f995c7ffdde46a626ddccd7c63aefc0efae881dc13b6e5d5bb16/rpds_py-0.30.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
-        sha256 "47f236970bccb2233267d89173d3ad2703cd36a0e2a6e92d0560d333871a3d23"
-      end
-    end
-    on_arm do
-      resource "rpds-py" do
-        url "https://files.pythonhosted.org/packages/65/1c/ae157e83a6357eceff62ba7e52113e3ec4834a84cfe07fa4b0757a7d105f/rpds_py-0.30.0-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl"
-        sha256 "ca28829ae5f5d569bb62a79512c842a03a12576375d5ece7d2cadf8abe96ec28"
-      end
-    end
-  end
-  on_macos do
-    on_intel do
-      resource "uvloop" do
-        url "https://files.pythonhosted.org/packages/3d/ff/7f72e8170be527b4977b033239a83a68d5c881cc4775fca255c677f7ac5d/uvloop-0.22.1-cp312-cp312-macosx_10_13_universal2.whl"
-        sha256 "fe94b4564e865d968414598eea1a6de60adba0c040ba4ed05ac1300de402cd42"
-      end
-    end
-  end
-  on_linux do
-    on_intel do
-      resource "uvloop" do
-        url "https://files.pythonhosted.org/packages/5f/6f/e62b4dfc7ad6518e7eff2516f680d02a0f6eb62c0c212e152ca708a0085e/uvloop-0.22.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl"
-        sha256 "7b5b1ac819a3f946d3b2ee07f09149578ae76066d70b44df3fa990add49a82e4"
-      end
-    end
-    on_arm do
-      resource "uvloop" do
-        url "https://files.pythonhosted.org/packages/24/68/a6ac446820273e71aa762fa21cdcc09861edd3536ff47c5cd3b7afb10eeb/uvloop-0.22.1-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl"
-        sha256 "700e674a166ca5778255e0e1dc4e9d79ab2acc57b9171b79e65feba7184b3370"
-      end
-    end
-  end
-  on_macos do
-    on_arm do
-      resource "watchfiles" do
-        url "https://files.pythonhosted.org/packages/5f/8f/6af2ea19065c91d8b0ea3516fdfc8c0d349f407e8e9fbf4e5a17360de8ad/watchfiles-1.2.0-cp312-cp312-macosx_11_0_arm64.whl"
-        sha256 "2d95ddc1eb6914154253d239089900813f6a767e174b8e6a50e7fdacb7e4236c"
-      end
-    end
-    on_intel do
-      resource "watchfiles" do
-        url "https://files.pythonhosted.org/packages/b8/2f/e42c992d2afda3108ea1c02acecc991b9f31d05c14adc2a7cee9ee211fc4/watchfiles-1.2.0-cp312-cp312-macosx_10_12_x86_64.whl"
-        sha256 "bc13eb17538be00c874699dc0abe4ee2bc8d50bb1166a6b9e175ef3fd7eb8f26"
-      end
-    end
-  end
-  on_linux do
-    on_intel do
-      resource "watchfiles" do
-        url "https://files.pythonhosted.org/packages/22/24/ed72f68cbc1333ca9b9f2200aa048bb6658ae41709bc1caad4310f4bdffd/watchfiles-1.2.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
-        sha256 "e53a384f76b631c3ae5334ce6a52f0baa3a911eb94a4eac7f160079868b716d5"
-      end
-    end
-    on_arm do
-      resource "watchfiles" do
-        url "https://files.pythonhosted.org/packages/13/01/b32a967c56fb3e3e5be3db52c3d3b87fa4513aa367d8ed1ad96d42952e5f/watchfiles-1.2.0-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl"
-        sha256 "8f70d8b291ef6e88d19b1f297a6905ddb978888d9272b0d05e6f53309856bcfc"
-      end
-    end
-  end
-
   # ── Sdist fallback (compiled from source by brew at install time) ───
   resource "aliyun-python-sdk-core" do
     url "https://files.pythonhosted.org/packages/3e/09/da9f58eb38b4fdb97ba6523274fbf445ef6a06be64b433693da8307b4bec/aliyun-python-sdk-core-2.16.0.tar.gz"
@@ -926,12 +741,68 @@ class Openvox < Formula
   # ─── END GENERATED RESOURCES ───
 
   def install
-    # `virtualenv_install_with_resources` is the Homebrew-blessed
-    # one-liner that creates a venv, installs every `resource` above,
-    # then installs the main package. Handles bin-shim creation +
-    # rpath fixups so `brew install openvox` produces a clean
-    # `openvox` on PATH.
-    virtualenv_install_with_resources
+    # Why we don't use `virtualenv_install_with_resources` (the
+    # Homebrew-blessed one-liner): it hardcodes `pip install
+    # --no-binary :all:` which forbids wheel resources and forces
+    # every dep to compile from source. With ~17 compiled deps in
+    # the tree (numpy / cryptography / pydantic-core / asyncpg /
+    # aiohttp / hiredis / etc.) that's 20-40 min on M-series and
+    # can hard-fail if Homebrew didn't pre-install Fortran/BLAS.
+    #
+    # Custom path: create the venv, then pip-install each resource
+    # individually. Wheel resources go in via `pip install <whl-file>`;
+    # sdist resources go in via the standard stage-then-`pip install .`.
+    # Build-isolation stays ON so sdists that need setuptools /
+    # hatchling pick up their build backend from PyPI at install
+    # time (default pip behaviour, no flag needed).
+    # virtualenv_create populates libexec/ with the venv. We don't keep
+    # a handle on the returned Virtualenv object because we install
+    # resources directly via pip below — its helper methods would
+    # re-introduce --no-binary :all:.
+    virtualenv_create(libexec, "python@3.12")
+
+    # `virtualenv_create` runs `python -m venv` with --without-pip, so
+    # the venv has no pip. We invoke the parent python's pip with
+    # `--python=<venv-python>` to install into the venv — same form
+    # Homebrew's own `Virtualenv#system_pip` helper uses.
+    # `opt_libexec/bin/python` (no version suffix) is the same handle
+    # Homebrew's own Virtualenv helper uses — it points at python@3.12's
+    # PEP-668-friendly framework wrapper, which is the one allowed to
+    # install into venvs created from it.
+    parent_python = Formula["python@3.12"].opt_libexec/"bin/python"
+    venv_python = libexec/"bin/python"
+
+    install_into_venv = lambda do |target|
+      system parent_python, "-m", "pip",
+             "--python=#{venv_python}",
+             "install",
+             "--no-deps",
+             "--disable-pip-version-check",
+             target.to_s
+    end
+
+    resources.each do |r|
+      if r.url.end_with?(".whl")
+        # Wheel: brew's standard `r.stage` block unpacks the wheel
+        # into a dir (wheels are zips); pip then refuses the dir
+        # because of --no-binary :all: in its build path. Skip
+        # stage and install directly from the cached download.
+        r.fetch
+        install_into_venv.call(r.cached_download)
+      else
+        # Sdist: standard stage and install.
+        r.stage do
+          install_into_venv.call(Pathname.pwd)
+        end
+      end
+    end
+
+    # openvox-core itself comes from the formula's main `url`
+    # (an sdist). buildpath is the unpacked tree root.
+    install_into_venv.call(buildpath)
+
+    # Expose the bin shim on PATH.
+    bin.install_symlink Dir[libexec/"bin/openvox"]
   end
 
   test do
