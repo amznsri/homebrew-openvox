@@ -46,12 +46,12 @@ class Openvox < Formula
   homepage "https://github.com/amznsri/openvox"
 
   # These two lines are rewritten by the release pipeline on every tag.
-  # The 0.2.4 + zero-sha placeholders are intentional — they make a
+  # The 0.2.5 + zero-sha placeholders are intentional — they make a
   # mistakenly-tapped pre-release formula fail at the download step
   # rather than silently install a broken build.
-  url "https://files.pythonhosted.org/packages/source/o/openvox-core/openvox_core-0.2.4.tar.gz"
-  version "0.2.4"
-  sha256 "bb5fef62947ee4b915a424709867ffeb85ea7393f001c7050e91d7eb9e727545"
+  url "https://files.pythonhosted.org/packages/source/o/openvox-core/openvox_core-0.2.5.tar.gz"
+  version "0.2.5"
+  sha256 "350db290a238974d833e8679e52638526d1bf60bb8b29edb4d9393305647f09f"
 
   license "Apache-2.0"
   head "https://github.com/amznsri/openvox.git", branch: "main"
@@ -782,16 +782,25 @@ class Openvox < Formula
              target.to_s
     end
 
+    # Wheels need a sibling-dir to copy into. Homebrew's cache stores
+    # downloads as `<sha>--<original-filename>`, and pip's wheel
+    # filename parser refuses anything with that prefix
+    # ("wrong number of parts" — pip expects exactly
+    # `name-version-python-abi-platform.whl`). We copy each cached
+    # wheel to a canonical-named file under buildpath/_wheels/ and
+    # pip-install from there.
+    wheel_stage = buildpath/"_wheels"
+    wheel_stage.mkpath
+
     resources.each do |r|
       if r.url.end_with?(".whl")
-        # Wheel: brew's standard `r.stage` block unpacks the wheel
-        # into a dir (wheels are zips); pip then refuses the dir
-        # because of --no-binary :all: in its build path. Skip
-        # stage and install directly from the cached download.
         r.fetch
-        install_into_venv.call(r.cached_download)
+        whl = wheel_stage/File.basename(r.url)
+        cp r.cached_download, whl
+        install_into_venv.call(whl)
       else
-        # Sdist: standard stage and install.
+        # Sdist: standard stage and install. The stage block extracts
+        # the .tar.gz into a temp dir and cd's there before yielding.
         r.stage do
           install_into_venv.call(Pathname.pwd)
         end
