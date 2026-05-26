@@ -46,12 +46,12 @@ class Openvox < Formula
   homepage "https://github.com/amznsri/openvox"
 
   # These two lines are rewritten by the release pipeline on every tag.
-  # The 0.2.5 + zero-sha placeholders are intentional — they make a
+  # The 0.2.7 + zero-sha placeholders are intentional — they make a
   # mistakenly-tapped pre-release formula fail at the download step
   # rather than silently install a broken build.
-  url "https://files.pythonhosted.org/packages/source/o/openvox-core/openvox_core-0.2.5.tar.gz"
-  version "0.2.5"
-  sha256 "350db290a238974d833e8679e52638526d1bf60bb8b29edb4d9393305647f09f"
+  url "https://files.pythonhosted.org/packages/source/o/openvox-core/openvox_core-0.2.7.tar.gz"
+  version "0.2.7"
+  sha256 "0956758bbb4e0247f8713530a3ff239a985a19b577691c7096dddc406fb06981"
 
   license "Apache-2.0"
   head "https://github.com/amznsri/openvox.git", branch: "main"
@@ -93,8 +93,8 @@ class Openvox < Formula
         sha256 "8e3754ce60e1b11b0afad9a053481ff184d2ee24bea47099107156d1b84a84aa"
       end
       resource "httptools" do
-        url "https://files.pythonhosted.org/packages/2a/0d/7f3fd28e2ce311ccc998c388dd1c53b18120fda3b70ebb022b135dc9839b/httptools-0.7.1-cp312-cp312-macosx_11_0_arm64.whl"
-        sha256 "f25bbaf1235e27704f1a7b86cd3304eabc04f569c828101d94a0e605ef7205a5"
+        url "https://files.pythonhosted.org/packages/a5/42/cc4feea2945cb3051038f090c9b36bd5b8a9d7f5a894a506a8983e33fd1c/httptools-0.8.0-cp312-cp312-macosx_11_0_arm64.whl"
+        sha256 "5931891fb7b441b8a3853cf1b85c82c903defce084dd5f6771ca46e31bf862c5"
       end
       resource "MarkupSafe" do
         url "https://files.pythonhosted.org/packages/9a/81/7e4e08678a1f98521201c3079f77db69fb552acd56067661f8c2f534a718/markupsafe-3.0.3-cp312-cp312-macosx_11_0_arm64.whl"
@@ -159,8 +159,8 @@ class Openvox < Formula
         sha256 "60543f3b068b16a86e99ed96b7fdae71cdc1d8abdfe9b3f82032a555e52ece7e"
       end
       resource "httptools" do
-        url "https://files.pythonhosted.org/packages/53/7f/403e5d787dc4942316e515e949b0c8a013d84078a915910e9f391ba9b3ed/httptools-0.7.1-cp312-cp312-macosx_10_13_universal2.whl"
-        sha256 "38e0c83a2ea9746ebbd643bdfb521b9aa4a91703e2cd705c20443405d2fd16a5"
+        url "https://files.pythonhosted.org/packages/14/88/1d21a36da8f5cb0fa49eafd4b169eba5608d57e75bbcf61845cbc6243216/httptools-0.8.0-cp312-cp312-macosx_10_13_universal2.whl"
+        sha256 "880490234c10f70a9830743097e8958d6e4b9f5a0ffc24515023afeef984054d"
       end
       resource "MarkupSafe" do
         url "https://files.pythonhosted.org/packages/5a/72/147da192e38635ada20e0a2e1a51cf8823d2119ce8883f7053879c2199b5/markupsafe-3.0.3-cp312-cp312-macosx_10_13_x86_64.whl"
@@ -235,8 +235,8 @@ class Openvox < Formula
         sha256 "c25132902d3eff38781e0d54f27a0942ec849e3c07dbdce83c4d92b7e43c8dce"
       end
       resource "httptools" do
-        url "https://files.pythonhosted.org/packages/84/a6/b3965e1e146ef5762870bbe76117876ceba51a201e18cc31f5703e454596/httptools-0.7.1-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl"
-        sha256 "2c15f37ef679ab9ecc06bfc4e6e8628c32a8e4b305459de7cf6785acd57e4d03"
+        url "https://files.pythonhosted.org/packages/e3/a6/febbb8b8db0f58b38e44ad6cb946e6a255ae49b55f2e8543408fb7501ccd/httptools-0.8.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl"
+        sha256 "b15fc622b0f869d19207c4089a501d9bcc63ca5e071ffdd2f03f922df882dcb2"
       end
       resource "MarkupSafe" do
         url "https://files.pythonhosted.org/packages/3c/2e/8d0c2ab90a8c1d9a24f0399058ab8519a3279d1bd4289511d74e909f060e/markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl"
@@ -309,8 +309,8 @@ class Openvox < Formula
         sha256 "e89dabf436ee79b358fd970dcbed6333a36d91db73f27069ca24a02fb138a404"
       end
       resource "httptools" do
-        url "https://files.pythonhosted.org/packages/11/7d/71fee6f1844e6fa378f2eddde6c3e41ce3a1fb4b2d81118dd544e3441ec0/httptools-0.7.1-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl"
-        sha256 "7fe6e96090df46b36ccfaf746f03034e5ab723162bc51b0a4cf58305324036f2"
+        url "https://files.pythonhosted.org/packages/b7/e4/f90a0df0b83beff265b7e3b65f2a4cefd95792d4be0ac3e16049f2acd3c2/httptools-0.8.0-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl"
+        sha256 "425f83884fd6343828d8c565f046cb72b6d19063f6924093e11bcd8e1548cd09"
       end
       resource "MarkupSafe" do
         url "https://files.pythonhosted.org/packages/1e/2c/799f4742efc39633a1b54a92eec4082e4f815314869865d876824c257c1e/markupsafe-3.0.3-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl"
@@ -735,8 +735,8 @@ class Openvox < Formula
     sha256 "a8ab9ee7eb99e88a7e1382edc6ea641d219d585a7e074e3776e9dec9473e59c1"
   end
   resource "tos" do
-    url "https://files.pythonhosted.org/packages/9a/b3/13451226f564f88d9db2323e9b7eabcced792a0ad5ee1e333751a7634257/tos-2.9.0.tar.gz"
-    sha256 "861cfc348e770f099f911cb96b2c41774ada6c9c51b7a89d97e0c426074dd99e"
+    url "https://files.pythonhosted.org/packages/60/42/079680659e1f6c20f7b837e6b13f16d4c1c389889071f49c18baea9ac2ac/tos-2.9.1.tar.gz"
+    sha256 "06a5cc095d5b3f0e52b04aee8f7e60f8ddcf0c94c4408213e3485e40070d54ef"
   end
   # ─── END GENERATED RESOURCES ───
 
