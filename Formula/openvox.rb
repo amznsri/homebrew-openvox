@@ -46,12 +46,12 @@ class Openvox < Formula
   homepage "https://github.com/amznsri/openvox"
 
   # These two lines are rewritten by the release pipeline on every tag.
-  # The 0.2.12 + zero-sha placeholders are intentional — they make a
+  # The 0.2.13 + zero-sha placeholders are intentional — they make a
   # mistakenly-tapped pre-release formula fail at the download step
   # rather than silently install a broken build.
-  url "https://files.pythonhosted.org/packages/source/o/openvox-core/openvox_core-0.2.12.tar.gz"
-  version "0.2.12"
-  sha256 "75f944260d49d4d950016d97b6c807789280bcb923218ba280eac2a8b127cb0c"
+  url "https://files.pythonhosted.org/packages/source/o/openvox-core/openvox_core-0.2.13.tar.gz"
+  version "0.2.13"
+  sha256 "ecab228b447b1cc8e2981ee43ef3def6f8f984eb4316a010d3ffb0d1e5d6135d"
 
   license "Apache-2.0"
   head "https://github.com/amznsri/openvox.git", branch: "main"
