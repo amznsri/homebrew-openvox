@@ -46,12 +46,12 @@ class Openvox < Formula
   homepage "https://github.com/amznsri/openvox"
 
   # These two lines are rewritten by the release pipeline on every tag.
-  # The 0.2.9 + zero-sha placeholders are intentional — they make a
+  # The 0.2.10 + zero-sha placeholders are intentional — they make a
   # mistakenly-tapped pre-release formula fail at the download step
   # rather than silently install a broken build.
-  url "https://files.pythonhosted.org/packages/source/o/openvox-core/openvox_core-0.2.9.tar.gz"
-  version "0.2.9"
-  sha256 "736b48c68485cf7a38e9fc7abd4bb72621314dd43bf3f971707a3951e605758f"
+  url "https://files.pythonhosted.org/packages/source/o/openvox-core/openvox_core-0.2.10.tar.gz"
+  version "0.2.10"
+  sha256 "a14bfe1aa3841114b0658e7b07789aa89bb834af21d36094245c5d4a8acf2307"
 
   license "Apache-2.0"
   head "https://github.com/amznsri/openvox.git", branch: "main"
@@ -605,8 +605,8 @@ class Openvox < Formula
     sha256 "66adcc2aff09b3f1bbd95fc1e1577df8ac8723c978552fd43304c8a290ac5728"
   end
   resource "pypdf" do
-    url "https://files.pythonhosted.org/packages/5e/aa/4d17fe9ff165d1341878c570b14f5b7291106d63411adf640942a7e638aa/pypdf-6.12.1-py3-none-any.whl"
-    sha256 "8fa2a2321cf16247ed848bd7c97f193a60c08670d04abed5b0138327e51c43b0"
+    url "https://files.pythonhosted.org/packages/9e/44/fee070a16639d9869bb6a7e0f3a1b3946da1d66f32b9260b4d19cb90d7b2/pypdf-6.12.2-py3-none-any.whl"
+    sha256 "67b2699357a1f3f4c945940ea80826349ee507c9e2577724a14b4941982c104d"
   end
   resource "python-dateutil" do
     url "https://files.pythonhosted.org/packages/ec/57/56b9bcc3c9c6a792fcbaf139543cee77261f3651ca9da0c93f5c1221264b/python_dateutil-2.9.0.post0-py2.py3-none-any.whl"
@@ -685,8 +685,8 @@ class Openvox < Formula
     sha256 "1c50bfb394b5dbc044bacab24b2e3b550bee0c08da51c4a1fa4816293303e66c"
   end
   resource "typer" do
-    url "https://files.pythonhosted.org/packages/3f/f9/2b3ff4e56e5fa7debfaf9eb135d0da96f3e9a1d5b27222223c7296336e5f/typer-0.25.1-py3-none-any.whl"
-    sha256 "75caa44ed46a03fb2dab8808753ffacdbfea88495e74c85a28c5eefcf5f39c89"
+    url "https://files.pythonhosted.org/packages/64/e1/01faefdf98e3a05ca5f3487caabab033fda84c5bd1bae7f73b8bb5dd553e/typer-0.26.0-py3-none-any.whl"
+    sha256 "859d520a4dc91c075cb370195462b6f7024fceb5d6de5c204bb8b1d51a60ad66"
   end
   resource "typing-inspection" do
     url "https://files.pythonhosted.org/packages/dc/9b/47798a6c91d8bdb567fe2698fe81e0c6b7cb7ef4d13da4114b41d239f65d/typing_inspection-0.4.2-py3-none-any.whl"
