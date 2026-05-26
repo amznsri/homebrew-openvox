@@ -46,12 +46,12 @@ class Openvox < Formula
   homepage "https://github.com/amznsri/openvox"
 
   # These two lines are rewritten by the release pipeline on every tag.
-  # The 0.2.13 + zero-sha placeholders are intentional — they make a
+  # The 0.2.14 + zero-sha placeholders are intentional — they make a
   # mistakenly-tapped pre-release formula fail at the download step
   # rather than silently install a broken build.
-  url "https://files.pythonhosted.org/packages/source/o/openvox-core/openvox_core-0.2.13.tar.gz"
-  version "0.2.13"
-  sha256 "ecab228b447b1cc8e2981ee43ef3def6f8f984eb4316a010d3ffb0d1e5d6135d"
+  url "https://files.pythonhosted.org/packages/source/o/openvox-core/openvox_core-0.2.14.tar.gz"
+  version "0.2.14"
+  sha256 "444e5f02a8b0bed78cf26c6220ecbb3ce626d056424da5971c90cc97b47f7508"
 
   license "Apache-2.0"
   head "https://github.com/amznsri/openvox.git", branch: "main"
@@ -685,8 +685,8 @@ class Openvox < Formula
     sha256 "1c50bfb394b5dbc044bacab24b2e3b550bee0c08da51c4a1fa4816293303e66c"
   end
   resource "typer" do
-    url "https://files.pythonhosted.org/packages/64/e1/01faefdf98e3a05ca5f3487caabab033fda84c5bd1bae7f73b8bb5dd553e/typer-0.26.0-py3-none-any.whl"
-    sha256 "859d520a4dc91c075cb370195462b6f7024fceb5d6de5c204bb8b1d51a60ad66"
+    url "https://files.pythonhosted.org/packages/be/27/8a22d4833fe8aa0836ce7fa59096ad50d7e93b83be6d5383f11f9a140d54/typer-0.26.1-py3-none-any.whl"
+    sha256 "933e4f0083521f3c57d6a5aedf3b073271b2f95a19761b171b494dd6fdb21ff6"
   end
   resource "typing-inspection" do
     url "https://files.pythonhosted.org/packages/dc/9b/47798a6c91d8bdb567fe2698fe81e0c6b7cb7ef4d13da4114b41d239f65d/typing_inspection-0.4.2-py3-none-any.whl"
