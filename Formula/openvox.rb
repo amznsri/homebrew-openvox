@@ -46,12 +46,12 @@ class Openvox < Formula
   homepage "https://github.com/amznsri/openvox"
 
   # These two lines are rewritten by the release pipeline on every tag.
-  # The 0.2.14 + zero-sha placeholders are intentional — they make a
+  # The 0.2.15 + zero-sha placeholders are intentional — they make a
   # mistakenly-tapped pre-release formula fail at the download step
   # rather than silently install a broken build.
-  url "https://files.pythonhosted.org/packages/source/o/openvox-core/openvox_core-0.2.14.tar.gz"
-  version "0.2.14"
-  sha256 "444e5f02a8b0bed78cf26c6220ecbb3ce626d056424da5971c90cc97b47f7508"
+  url "https://files.pythonhosted.org/packages/source/o/openvox-core/openvox_core-0.2.15.tar.gz"
+  version "0.2.15"
+  sha256 "629f33a97ddf952171cf70dfc98c7ee320e4c93b66c770fdac28de2ec1bc2273"
 
   license "Apache-2.0"
   head "https://github.com/amznsri/openvox.git", branch: "main"
@@ -409,12 +409,12 @@ class Openvox < Formula
     sha256 "3e1faedc9d87e7d56a164eca3ccb6ace0d61b94abe83e92242f8dc8bba9b4a9f"
   end
   resource "boto3" do
-    url "https://files.pythonhosted.org/packages/cb/00/59cb9329c18e2d3aa23062ceaa87d065f2e81e7d2931df24d64e9a7815aa/boto3-1.43.14-py3-none-any.whl"
-    sha256 "574335744656cfed0b362a0a0467aaf2eb2bf15526edcd02d31d3c661f4b09e4"
+    url "https://files.pythonhosted.org/packages/af/8f/373833a5ca86f5b89c7d918c6130aece8d5e43b0c8bdbefac75145abf3f3/boto3-1.43.15-py3-none-any.whl"
+    sha256 "67510ef57a79f0d53b963b0dd1d1741d1e3de1eb2ef6cf1737b6a6bddd34b8cb"
   end
   resource "botocore" do
-    url "https://files.pythonhosted.org/packages/27/7e/6e64821077cd2efc4aa51b7d638fb6d48e1c7c450201c529fbaf1de8bfd3/botocore-1.43.14-py3-none-any.whl"
-    sha256 "1f4a2a95ea78c10398e78431e98c1fe47adb54a7b10a32975144c1f541186658"
+    url "https://files.pythonhosted.org/packages/51/34/dfdd494cf22a88be269bcf648d28a65f85dcc0f914f52a02f8e740d6ccaf/botocore-1.43.15-py3-none-any.whl"
+    sha256 "bda4923998d1bf17f8eb6bc767a0923fbb9e525ecd50f839b041e469b46e1c94"
   end
   resource "certifi" do
     url "https://files.pythonhosted.org/packages/59/8c/57e832b7af6d7c5abe66eb3fbe3a3a32f4d11ea23a1aa7131371035be991/certifi-2026.5.20-py3-none-any.whl"
@@ -649,8 +649,8 @@ class Openvox < Formula
     sha256 "68635866661c6836b8d39430f97a996acbd61bfa49406748ea243539fe239762"
   end
   resource "s3transfer" do
-    url "https://files.pythonhosted.org/packages/87/72/c6c32d2b657fa3dad1de340254e14390b1e334ce38268b7ad51abda3c8c2/s3transfer-0.17.0-py3-none-any.whl"
-    sha256 "ce3801712acf4ad3e89fb9990df97b4972e93f4b3b0004d214be5bce12814c20"
+    url "https://files.pythonhosted.org/packages/85/dd/904873250a6554fbae40cddbf9198e3cc37a2f1319d5e1a5ce82fe269c17/s3transfer-0.17.1-py3-none-any.whl"
+    sha256 "5b9827d1044159bbb01b86ef8902760ea39281927f5de31de75e1d657177bf4c"
   end
   resource "shellingham" do
     url "https://files.pythonhosted.org/packages/e0/f9/0595336914c5619e5f28a1fb793285925a8cd4b432c9da0a987836c7f822/shellingham-1.5.4-py2.py3-none-any.whl"
