@@ -46,12 +46,12 @@ class Openvox < Formula
   homepage "https://github.com/amznsri/openvox"
 
   # These two lines are rewritten by the release pipeline on every tag.
-  # The 0.2.20 + zero-sha placeholders are intentional — they make a
+  # The 0.2.25 + zero-sha placeholders are intentional — they make a
   # mistakenly-tapped pre-release formula fail at the download step
   # rather than silently install a broken build.
-  url "https://files.pythonhosted.org/packages/source/o/openvox-core/openvox_core-0.2.20.tar.gz"
-  version "0.2.20"
-  sha256 "7204066dfab5892f841ae1dfe81f15e395feda438ea0a98e25e532434de2449e"
+  url "https://files.pythonhosted.org/packages/source/o/openvox-core/openvox_core-0.2.25.tar.gz"
+  version "0.2.25"
+  sha256 "bac17b33ffcc0551a1dd1f5934da49a06bf401e1fe9c5d732ae8d90d62982080"
 
   license "Apache-2.0"
   head "https://github.com/amznsri/openvox.git", branch: "main"
@@ -493,8 +493,8 @@ class Openvox < Formula
     sha256 "cdf6525904cc597730141d61b36f2e4b8ecc257c420fa2f4549bac2c2d0cb72f"
   end
   resource "joserfc" do
-    url "https://files.pythonhosted.org/packages/c5/e4/bcf6718b5662894c6831f46296b73cd4b1a2e90c20b6d437e20c4997388c/joserfc-1.6.7-py3-none-any.whl"
-    sha256 "9e51e4a64840aa1734a058258e80a4480e2ff2d5686e480e7c92c954a92fbe05"
+    url "https://files.pythonhosted.org/packages/98/8c/5cdce2cf3ce8155849baf9a5e2ce77e89dc87ec3bdb38259e5d85fbc45bd/joserfc-1.6.8-py3-none-any.whl"
+    sha256 "22fb31a69094a5e6f44632002a9df2c30c941fc6c8ce1b037e92c03de954cf9f"
   end
   resource "jsonschema" do
     url "https://files.pythonhosted.org/packages/69/90/f63fb5873511e014207a475e2bb4e8b2e570d655b00ac19a9a0ca0a385ee/jsonschema-4.26.0-py3-none-any.whl"
