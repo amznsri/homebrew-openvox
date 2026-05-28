@@ -46,12 +46,12 @@ class Openvox < Formula
   homepage "https://github.com/amznsri/openvox"
 
   # These two lines are rewritten by the release pipeline on every tag.
-  # The 0.2.30 + zero-sha placeholders are intentional — they make a
+  # The 0.2.31 + zero-sha placeholders are intentional — they make a
   # mistakenly-tapped pre-release formula fail at the download step
   # rather than silently install a broken build.
-  url "https://files.pythonhosted.org/packages/source/o/openvox-core/openvox_core-0.2.30.tar.gz"
-  version "0.2.30"
-  sha256 "976c599ffc75b2872b4426a8951854fbda9c507ff2ef0e8cf78b5290493abfe8"
+  url "https://files.pythonhosted.org/packages/source/o/openvox-core/openvox_core-0.2.31.tar.gz"
+  version "0.2.31"
+  sha256 "b626e5a60dea57ecf4096a88cb766d8bcf85e64aabcd5dc7ab2bd28ac5e74a95"
 
   license "Apache-2.0"
   head "https://github.com/amznsri/openvox.git", branch: "main"
@@ -117,8 +117,8 @@ class Openvox < Formula
         sha256 "fc09d0aa354569bc501d4e787133afc08552722d3ab34836a80547331bb5d4a0"
       end
       resource "rpds-py" do
-        url "https://files.pythonhosted.org/packages/4d/a1/bca7fd3d452b272e13335db8d6b0b3ecde0f90ad6f16f3328c6fb150c889/rpds_py-0.30.0-cp312-cp312-macosx_11_0_arm64.whl"
-        sha256 "6abc8880d9d036ecaafe709079969f56e876fcf107f7a8e9920ba6d5a3878d05"
+        url "https://files.pythonhosted.org/packages/a3/43/35e3f136343aef451e545ce8c38d36c2f93c0ed88703db8b64ba2b205c68/rpds_py-2026.5.1-cp312-cp312-macosx_11_0_arm64.whl"
+        sha256 "58b1d94308ddf0b1982f61f2eb54bf92997c9ece8a8093ef014250f4a517906c"
       end
       resource "watchfiles" do
         url "https://files.pythonhosted.org/packages/5f/8f/6af2ea19065c91d8b0ea3516fdfc8c0d349f407e8e9fbf4e5a17360de8ad/watchfiles-1.2.0-cp312-cp312-macosx_11_0_arm64.whl"
@@ -187,8 +187,8 @@ class Openvox < Formula
         sha256 "7f047e29dcae44602496db43be01ad42fc6f1cc0d8cd6c83d342306c32270196"
       end
       resource "rpds-py" do
-        url "https://files.pythonhosted.org/packages/03/e7/98a2f4ac921d82f33e03f3835f5bf3a4a40aa1bfdc57975e74a97b2b4bdd/rpds_py-0.30.0-cp312-cp312-macosx_10_12_x86_64.whl"
-        sha256 "a161f20d9a43006833cd7068375a94d035714d73a172b681d8881820600abfad"
+        url "https://files.pythonhosted.org/packages/d4/e7/a78582dc57caa592dcc7d4fb69b61390561e908eb3d2f5df5928a8e354c0/rpds_py-2026.5.1-cp312-cp312-macosx_10_12_x86_64.whl"
+        sha256 "3abe24a66e57adcfa645d718063a5fa5103ecc71ddbf26d78af8f9368018ff1d"
       end
       resource "uvloop" do
         url "https://files.pythonhosted.org/packages/3d/ff/7f72e8170be527b4977b033239a83a68d5c881cc4775fca255c677f7ac5d/uvloop-0.22.1-cp312-cp312-macosx_10_13_universal2.whl"
@@ -263,8 +263,8 @@ class Openvox < Formula
         sha256 "ba1cc08a7ccde2d2ec775841541641e4548226580ab850948cbfda66a1befcdc"
       end
       resource "rpds-py" do
-        url "https://files.pythonhosted.org/packages/60/1b/6f8f29f3f995c7ffdde46a626ddccd7c63aefc0efae881dc13b6e5d5bb16/rpds_py-0.30.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
-        sha256 "47f236970bccb2233267d89173d3ad2703cd36a0e2a6e92d0560d333871a3d23"
+        url "https://files.pythonhosted.org/packages/f4/1e/2c9096fc19d5fd084b0184ca2b651e659aa0a37e6fdbecf6ece47f147fe1/rpds_py-2026.5.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
+        sha256 "b6825cc329b290e93c5f6a9be2393118a763f6ccf6abd83704e0c102ca583644"
       end
       resource "uvloop" do
         url "https://files.pythonhosted.org/packages/5f/6f/e62b4dfc7ad6518e7eff2516f680d02a0f6eb62c0c212e152ca708a0085e/uvloop-0.22.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl"
@@ -337,8 +337,8 @@ class Openvox < Formula
         sha256 "9149cad251584d5fb4981be1ecde53a1ca46c891a79788c0df828d2f166bda28"
       end
       resource "rpds-py" do
-        url "https://files.pythonhosted.org/packages/65/1c/ae157e83a6357eceff62ba7e52113e3ec4834a84cfe07fa4b0757a7d105f/rpds_py-0.30.0-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl"
-        sha256 "ca28829ae5f5d569bb62a79512c842a03a12576375d5ece7d2cadf8abe96ec28"
+        url "https://files.pythonhosted.org/packages/20/e1/0f2160c5982d3157734d5cb3ed63d8b2d583a73c9864f77b666449f32cf8/rpds_py-2026.5.1-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl"
+        sha256 "0fa92420128dadce7f54bd73ba1825a273e9268fe9e35dbf7e6362890efa4e08"
       end
       resource "uvloop" do
         url "https://files.pythonhosted.org/packages/24/68/a6ac446820273e71aa762fa21cdcc09861edd3536ff47c5cd3b7afb10eeb/uvloop-0.22.1-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl"
@@ -409,12 +409,12 @@ class Openvox < Formula
     sha256 "3e1faedc9d87e7d56a164eca3ccb6ace0d61b94abe83e92242f8dc8bba9b4a9f"
   end
   resource "boto3" do
-    url "https://files.pythonhosted.org/packages/af/8f/373833a5ca86f5b89c7d918c6130aece8d5e43b0c8bdbefac75145abf3f3/boto3-1.43.15-py3-none-any.whl"
-    sha256 "67510ef57a79f0d53b963b0dd1d1741d1e3de1eb2ef6cf1737b6a6bddd34b8cb"
+    url "https://files.pythonhosted.org/packages/af/c0/7d687e40f4b7046ede66026ecd1b0a93d47afe26d9170f5926a1605c8641/boto3-1.43.16-py3-none-any.whl"
+    sha256 "dffc8a3cd3edbc0ad95b9c6b983e873b76ede46d3aa0709f94db253f2ff2388f"
   end
   resource "botocore" do
-    url "https://files.pythonhosted.org/packages/51/34/dfdd494cf22a88be269bcf648d28a65f85dcc0f914f52a02f8e740d6ccaf/botocore-1.43.15-py3-none-any.whl"
-    sha256 "bda4923998d1bf17f8eb6bc767a0923fbb9e525ecd50f839b041e469b46e1c94"
+    url "https://files.pythonhosted.org/packages/46/8f/25933240485c0662bb3fa430ed0c6b8b8124ab3bc136154c07ce12644cb0/botocore-1.43.16-py3-none-any.whl"
+    sha256 "8ab05b1346d26a3c6d69c7338051f07bd4739a090f414d2cff43c0dbc1e18ca7"
   end
   resource "certifi" do
     url "https://files.pythonhosted.org/packages/59/8c/57e832b7af6d7c5abe66eb3fbe3a3a32f4d11ea23a1aa7131371035be991/certifi-2026.5.20-py3-none-any.whl"
@@ -629,8 +629,8 @@ class Openvox < Formula
     sha256 "04156e608bee23d3792fd45c94ae47fae1036688e75032eea2e3bf0323d1f126"
   end
   resource "redis" do
-    url "https://files.pythonhosted.org/packages/74/3a/95deec7db1eb53979973ebd156f3369a72732208d1391cd2e5d127062a32/redis-7.4.0-py3-none-any.whl"
-    sha256 "a9c74a5c893a5ef8455a5adb793a31bb70feb821c86eccb62eebef5a19c429ec"
+    url "https://files.pythonhosted.org/packages/27/e3/b519734372d305bd547534a9f32e4ce9f98552af753dce72cf3483a0ff0b/redis-8.0.0-py3-none-any.whl"
+    sha256 "c938c18338585009f0bc310f4c7e4e4b4d37639356c4ac072cedf3af570c8dc7"
   end
   resource "referencing" do
     url "https://files.pythonhosted.org/packages/2c/58/ca301544e1fa93ed4f80d724bf5b194f6e4b945841c5bfd555878eea9fcb/referencing-0.37.0-py3-none-any.whl"
@@ -669,8 +669,8 @@ class Openvox < Formula
     sha256 "3f4dd50d8aed2771a091f3a83000323fc3844541c16b4fe585ae2420cc6df973"
   end
   resource "starlette" do
-    url "https://files.pythonhosted.org/packages/93/79/920b8e0a8b20f793e8d64855095cb8febabf6175b8550b6f7a547d813891/starlette-1.1.0-py3-none-any.whl"
-    sha256 "7f0dfd38e428aad5cb6f9f667f0ca1d2d8ca3f3385dccac8305f79ec98458382"
+    url "https://files.pythonhosted.org/packages/9f/85/492183764d5d01d4514be3730fdb8e228a80605783099551c51627578b5d/starlette-1.2.0-py3-none-any.whl"
+    sha256 "36e0c76ac59157e75dc4b3bdeafba97fb04eaf1878045f15dbef666a6f092ed7"
   end
   resource "structlog" do
     url "https://files.pythonhosted.org/packages/a8/45/a132b9074aa18e799b891b91ad72133c98d8042c70f6240e4c5f9dabee2f/structlog-25.5.0-py3-none-any.whl"
