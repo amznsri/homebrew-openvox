@@ -46,12 +46,12 @@ class Openvox < Formula
   homepage "https://github.com/amznsri/openvox"
 
   # These two lines are rewritten by the release pipeline on every tag.
-  # The 0.2.31 + zero-sha placeholders are intentional — they make a
+  # The 0.2.32 + zero-sha placeholders are intentional — they make a
   # mistakenly-tapped pre-release formula fail at the download step
   # rather than silently install a broken build.
-  url "https://files.pythonhosted.org/packages/source/o/openvox-core/openvox_core-0.2.31.tar.gz"
-  version "0.2.31"
-  sha256 "b626e5a60dea57ecf4096a88cb766d8bcf85e64aabcd5dc7ab2bd28ac5e74a95"
+  url "https://files.pythonhosted.org/packages/source/o/openvox-core/openvox_core-0.2.32.tar.gz"
+  version "0.2.32"
+  sha256 "fceb2eecdd5d471107424bada9f0c34419ff20f22211d033477dbe0a9872ae22"
 
   license "Apache-2.0"
   head "https://github.com/amznsri/openvox.git", branch: "main"
@@ -409,12 +409,12 @@ class Openvox < Formula
     sha256 "3e1faedc9d87e7d56a164eca3ccb6ace0d61b94abe83e92242f8dc8bba9b4a9f"
   end
   resource "boto3" do
-    url "https://files.pythonhosted.org/packages/af/c0/7d687e40f4b7046ede66026ecd1b0a93d47afe26d9170f5926a1605c8641/boto3-1.43.16-py3-none-any.whl"
-    sha256 "dffc8a3cd3edbc0ad95b9c6b983e873b76ede46d3aa0709f94db253f2ff2388f"
+    url "https://files.pythonhosted.org/packages/f9/1e/30b218998dee295873f33c591bb5daf08c42ec27e5fb0ebb13977677e96f/boto3-1.43.17-py3-none-any.whl"
+    sha256 "f6b3862a0b14e237f9323223ee76b0563e87a6bbe6d94a42e7b008a901ba8950"
   end
   resource "botocore" do
-    url "https://files.pythonhosted.org/packages/46/8f/25933240485c0662bb3fa430ed0c6b8b8124ab3bc136154c07ce12644cb0/botocore-1.43.16-py3-none-any.whl"
-    sha256 "8ab05b1346d26a3c6d69c7338051f07bd4739a090f414d2cff43c0dbc1e18ca7"
+    url "https://files.pythonhosted.org/packages/d6/ff/1625713b2ecac9f9bb65c7a51e71cb206b3089ba38f86ba5eff34e947176/botocore-1.43.17-py3-none-any.whl"
+    sha256 "499af7c942ecfd404322974e82c6b5d05a8ea16e9f19320b353e16f401adc5b4"
   end
   resource "certifi" do
     url "https://files.pythonhosted.org/packages/59/8c/57e832b7af6d7c5abe66eb3fbe3a3a32f4d11ea23a1aa7131371035be991/certifi-2026.5.20-py3-none-any.whl"
@@ -485,8 +485,8 @@ class Openvox < Formula
     sha256 "0ac1c9fe3c0afad2e0ebb25a934a59f4c7823b60792691f779fad2c5568830fc"
   end
   resource "idna" do
-    url "https://files.pythonhosted.org/packages/94/16/70255075a9859a0e3adb789b68ceb0e210dec03934245fd98d248226572f/idna-3.16-py3-none-any.whl"
-    sha256 "cc246e3a3f89580c3a951b5ad298ca4638078b2cdd4f115654332b5c26daded5"
+    url "https://files.pythonhosted.org/packages/de/a7/f76514cc40ad6234098ecdebda08732d75964776c51a42845b7da10649e2/idna-3.17-py3-none-any.whl"
+    sha256 "466e48829084efe2548012b855df21540b96f2e20e51bd124c851536556a592c"
   end
   resource "jmespath" do
     url "https://files.pythonhosted.org/packages/07/cb/5f001272b6faeb23c1c9e0acc04d48eaaf5c862c17709d20e3469c6e0139/jmespath-0.10.0-py2.py3-none-any.whl"
@@ -649,8 +649,8 @@ class Openvox < Formula
     sha256 "68635866661c6836b8d39430f97a996acbd61bfa49406748ea243539fe239762"
   end
   resource "s3transfer" do
-    url "https://files.pythonhosted.org/packages/85/dd/904873250a6554fbae40cddbf9198e3cc37a2f1319d5e1a5ce82fe269c17/s3transfer-0.17.1-py3-none-any.whl"
-    sha256 "5b9827d1044159bbb01b86ef8902760ea39281927f5de31de75e1d657177bf4c"
+    url "https://files.pythonhosted.org/packages/2b/58/a58fc997655386daa2e25784e30c288aa3e3819e401f77029ee4899fb55a/s3transfer-0.18.0-py3-none-any.whl"
+    sha256 "239c13b09e65ad0346e1be7348b8a202dcad44ac7ea7c6eb858fc881dce739b6"
   end
   resource "shellingham" do
     url "https://files.pythonhosted.org/packages/e0/f9/0595336914c5619e5f28a1fb793285925a8cd4b432c9da0a987836c7f822/shellingham-1.5.4-py2.py3-none-any.whl"
@@ -685,8 +685,8 @@ class Openvox < Formula
     sha256 "1c50bfb394b5dbc044bacab24b2e3b550bee0c08da51c4a1fa4816293303e66c"
   end
   resource "typer" do
-    url "https://files.pythonhosted.org/packages/8b/a5/6ffd702beda8798b2b82ff70805ed4a66d963557e43a5d1823ab456251a4/typer-0.26.2-py3-none-any.whl"
-    sha256 "39beff72ffbb31978a5b545f677d57edb97c6f980f433b38556deb0af25f094d"
+    url "https://files.pythonhosted.org/packages/cd/cc/c6c5dea061e2740355bfeef22ac6a41751bd2f3903e83921295569bdcec4/typer-0.26.3-py3-none-any.whl"
+    sha256 "e70549ec5a403ca8a0bf0802ddd9f3c6ff7a14ccbb859b01b697baa943636f33"
   end
   resource "typing-inspection" do
     url "https://files.pythonhosted.org/packages/dc/9b/47798a6c91d8bdb567fe2698fe81e0c6b7cb7ef4d13da4114b41d239f65d/typing_inspection-0.4.2-py3-none-any.whl"
